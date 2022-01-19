@@ -6,8 +6,11 @@ public class Spawner : MonoBehaviour
 {
     #region Variables
 
-    [SerializeField] private float m_FuckingWaitSeconds;
+    [SerializeField] private Vector2 m_FuckingWaitSecondsRange;
+    private float m_FuckingWaitSeconds;
     [SerializeField] private GameObject[] m_FuckingEnemies;
+    [SerializeField] private Transform m_FuckingYMax;
+    [SerializeField] private Transform m_FuckingYMin;
 
     #endregion
 
@@ -20,12 +23,22 @@ public class Spawner : MonoBehaviour
 
     #endregion
 
+    #region Spawn
+
     IEnumerator Spawn()
     {
+        m_FuckingWaitSeconds = Random.Range(m_FuckingWaitSecondsRange.x, m_FuckingWaitSecondsRange.y);
+
         yield return new WaitForSeconds(m_FuckingWaitSeconds);
 
-        int enemy = Random.Range(0, m_FuckingEnemies.Length);
+        int enemyIndex = Random.Range(0, m_FuckingEnemies.Length);
+        float yPos = Random.Range(m_FuckingYMin.position.y, m_FuckingYMax.position.y);
+
+        Instantiate(m_FuckingEnemies[enemyIndex], new Vector3(transform.position.x, yPos, transform.position.z), Quaternion.identity);
+
         // Spawn
         StartCoroutine(Spawn());
     }
+
+    #endregion
 }

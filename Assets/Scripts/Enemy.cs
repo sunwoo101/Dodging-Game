@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour
     #region Variables
 
     private int m_FuckingDirection;
-    [SerializeField] private float m_FuckingSpeed;
+    [SerializeField] private Vector2 m_FuckingSpeedRange;
+    private float m_FuckingSpeed;
 
     #endregion
 
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        m_FuckingSpeed = Random.Range(m_FuckingSpeedRange.x, m_FuckingSpeedRange.y);
         if (transform.position.x > 0)
         {
             m_FuckingDirection = -1;
