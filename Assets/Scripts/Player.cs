@@ -174,6 +174,16 @@ public class Player : MonoBehaviour
         OnCollision(collision.gameObject);
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        OnCollision(collision.gameObject);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        OnCollision(collision.gameObject);
+    }
+
     private void OnCollision(GameObject collider)
     {
         if (collider.CompareTag("Enemy") && m_FuckingCanDash)
