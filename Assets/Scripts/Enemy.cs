@@ -6,9 +6,9 @@ public class Enemy : MonoBehaviour
 {
     #region Variables
 
-    private int m_FuckingDirection;
-    [SerializeField] private Vector2 m_FuckingSpeedRange;
-    private float m_FuckingSpeed;
+    private int m_Direction;
+    [SerializeField] private Vector2 m_SpeedRange;
+    private float m_Speed;
 
     #endregion
 
@@ -16,14 +16,15 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        m_FuckingSpeed = Random.Range(m_FuckingSpeedRange.x, m_FuckingSpeedRange.y);
+        m_Speed = Random.Range(m_SpeedRange.x, m_SpeedRange.y);
+        // Choose direction to move depending on which side the enemy is spawned
         if (transform.position.x > 0)
         {
-            m_FuckingDirection = -1;
+            m_Direction = -1;
         }
         else
         {
-            m_FuckingDirection = 1;
+            m_Direction = 1;
         }
 
         Destroy(gameObject, 7);
@@ -35,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        transform.position += Vector3.right * m_FuckingSpeed * m_FuckingDirection * Time.deltaTime;
+        transform.position += Vector3.right * m_Speed * m_Direction * Time.deltaTime;
     }
 
     #endregion

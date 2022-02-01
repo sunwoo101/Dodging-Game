@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ba3b15b389c41f9a7c0bdffa2469bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FuckingSpeedRange: {x: 10, y: 15}
+  m_SpeedRange: {x: 10, y: 20}
 --- !u!61 &5667950738174647622
 BoxCollider2D:
   m_ObjectHideFlags: 0
