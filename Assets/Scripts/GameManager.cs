@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     #region Variables
 
-    // References
     [SerializeField] private Text m_ScoreText;
 
     [SerializeField] private Vector2 m_MinPos;
@@ -25,12 +24,16 @@ public class GameManager : MonoBehaviour
         set { m_Score = value; }
     }
 
+    public static bool m_Paused = false;
+    [SerializeField] private GameObject m_PauseMenu;
+
     #endregion
 
     #region Awake
 
     private void Awake()
     {
+        // Get the high score
         m_HighScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
@@ -49,7 +52,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        // Restart game
+        if (Input.GetKeyDown(KeyCode.R) && !m_Paused)
         {
             SceneManager.LoadScene(1);
         }
@@ -61,6 +65,18 @@ public class GameManager : MonoBehaviour
         if (m_NewCoin == null)
         {
             SpawnCoin();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (m_Paused)
+            {
+                Unpause();
+            }
+            else
+            {
+                Pause();
+            }
         }
     }
 
@@ -89,6 +105,37 @@ public class GameManager : MonoBehaviour
 
         // Spawn new coin
         m_NewCoin = Instantiate(m_Coin, new Vector3(xPos, yPos, 0), Quaternion.identity);
+    }
+
+    #endregion
+
+    #region Pause
+
+    private void Pause()
+    {
+        m_Paused = true;
+        m_PauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    #endregion
+
+    #region Unpause
+
+    public void Unpause()
+    {
+        m_Paused = false;
+        m_PauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    #endregion
+
+    #region Exit
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
     #endregion

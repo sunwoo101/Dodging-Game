@@ -28,4 +28,13 @@ public class MainMenu : MonoBehaviour
     }
 
     #endregion
+
+    #region ToggleFullscreen
+
+    public void ToggleFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
+    #endregion
 }

@@ -57,18 +57,21 @@ public class Player : MonoBehaviour
         m_Dash = Input.GetKeyDown(KeyCode.LeftShift);
 
         // Check which side the character is facing and makes the character face that direction (only works if you have a character sprite thats looking at the side)
-        if (m_Input > 0)
+        if (m_Input > 0 && !GameManager.m_Paused)
         {
             m_FacingRight = true;
             transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (m_Input < 0)
+        else if (m_Input < 0 && !GameManager.m_Paused)
         {
             m_FacingRight = false;
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        Move();
+        if (!GameManager.m_Paused)
+        {
+            Move();
+        }
         GroundCheck();
     }
 

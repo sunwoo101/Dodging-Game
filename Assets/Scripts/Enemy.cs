@@ -16,7 +16,9 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        // Randomize speed
         m_Speed = Random.Range(m_SpeedRange.x, m_SpeedRange.y);
+
         // Choose direction to move depending on which side the enemy is spawned
         if (transform.position.x > 0)
         {
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        // Enemy movement
         transform.position += Vector3.right * m_Speed * m_Direction * Time.deltaTime;
     }
 
